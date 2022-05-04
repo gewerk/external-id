@@ -2,7 +2,7 @@
   "name": "gewerk/external-id",
   "description": "Adds a hidden meta field for saving an external ID (from imports for example)",
   "type": "craft-plugin",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "license": "MIT",
   "authors": [
     {
