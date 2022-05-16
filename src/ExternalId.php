@@ -226,31 +226,37 @@ class ExternalId extends Plugin
     {
         Event::on(
             ElementQuery::class,
-            ElementQuery::EVENT_BEFORE_PREPARE,
+            ElementQuery::EVENT_AFTER_PREPARE,
             function (CancelableEvent $event) {
                 /**
                  * @var ElementQuery
                  * @mixin Behavior\ElementQueryBehavior
                  */
-                $query = $event->sender;
+                $elementQuery = $event->sender;
 
-                // Join query
-                $suffix = StringHelper::randomString(8);
-                $query->leftJoin(
-                    ["elements_external_ids_$suffix" => Record\ElementsExternalId::tableName()],
-                    "[[elements_external_ids_$suffix.id]] = [[elements.id]]"
+                // Add left join to subquery
+                $elementQuery->subQuery->leftJoin(
+                    Record\ElementsExternalId::tableName(),
+                    '[[elements_external_ids.id]] = [[elements.id]]'
                 );
 
-                // Add select
-                $query->addSelect([
-                    "[[elements_external_ids_$suffix.externalId]]",
-                ]);
+                // Add left to main query
+                if (count($elementQuery->query->select) > 1) {
+                    $elementQuery->query
+                        ->leftJoin(
+                            Record\ElementsExternalId::tableName(),
+                            '[[elements_external_ids.id]] = [[subquery.elementsId]]'
+                        )
+                        ->addSelect([
+                            '[[elements_external_ids.externalId]]',
+                        ]);
+                }
 
                 // Filter by external ID
-                if ($query->externalId) {
-                    $query->subQuery->andWhere(Db::parseParam(
-                        "[[elements_external_ids_$suffix.externalId]]",
-                        $query->externalId,
+                if ($elementQuery->externalId) {
+                    $elementQuery->subQuery->andWhere(Db::parseParam(
+                        '[[elements_external_ids.externalId]]',
+                        $elementQuery->externalId,
                         '=',
                         false,
                         'string'
