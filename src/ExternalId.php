@@ -32,7 +32,7 @@ use yii\base\InvalidConfigException;
  */
 class ExternalId extends Plugin
 {
-    const EVENT_REGISTER_ELEMENT_HOOKS = 'registerElementHooks';
+    public const EVENT_REGISTER_ELEMENT_HOOKS = 'registerElementHooks';
 
     /**
      * Current plugin instance
@@ -125,7 +125,7 @@ class ExternalId extends Plugin
         foreach ($event->elementHooks as $elementHook) {
             Craft::$app->view->hook(
                 $elementHook,
-                function(array &$context) {
+                function (array &$context) {
                     /** @var ElementInterface */
                     $element = $context['element'];
 
@@ -165,7 +165,7 @@ class ExternalId extends Plugin
         Event::on(
             ElementQuery::class,
             ElementQuery::EVENT_DEFINE_BEHAVIORS,
-            function(DefineBehaviorsEvent $event) {
+            function (DefineBehaviorsEvent $event) {
                 /** @var ElementQuery */
                 $sender = $event->sender;
                 $sender->attachBehaviors([
@@ -177,7 +177,7 @@ class ExternalId extends Plugin
         Event::on(
             Element::class,
             Element::EVENT_DEFINE_BEHAVIORS,
-            function(DefineBehaviorsEvent $event) {
+            function (DefineBehaviorsEvent $event) {
                 /** @var Element */
                 $sender = $event->sender;
                 $sender->attachBehaviors([
@@ -197,7 +197,7 @@ class ExternalId extends Plugin
         Event::on(
             Element::class,
             Element::EVENT_AFTER_SAVE,
-            function(ModelEvent $event) {
+            function (ModelEvent $event) {
                 /**
                  * @var Element
                  * @mixin Behavior\ElementBehavior
