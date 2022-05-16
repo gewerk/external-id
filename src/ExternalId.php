@@ -236,7 +236,7 @@ class ExternalId extends Plugin
 
                 // Join query
                 $suffix = StringHelper::randomString(8);
-                $query->innerJoin(
+                $query->leftJoin(
                     ["elements_external_ids_$suffix" => Record\ElementsExternalId::tableName()],
                     "[[elements_external_ids_$suffix.id]] = [[elements.id]]"
                 );
