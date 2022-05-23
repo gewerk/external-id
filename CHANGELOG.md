@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.3 - 2022-05-23
+
+* Check if externalId exists before accessing
+
 ## 1.0.2 - 2022-05-16
 
 * Fix block search queries
