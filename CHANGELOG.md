@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.4 - 2022-06-02
+
+* Fix querying for external ID
+
 ## 1.0.3 - 2022-05-23
 
 * Check if externalId exists before accessing
