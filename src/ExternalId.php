@@ -169,7 +169,7 @@ class ExternalId extends Plugin
                 /** @var ElementQuery */
                 $sender = $event->sender;
                 $sender->attachBehaviors([
-                    Behavior\ElementQueryBehavior::class,
+                    'externalId' => Behavior\ElementQueryBehavior::class,
                 ]);
             }
         );
@@ -181,7 +181,7 @@ class ExternalId extends Plugin
                 /** @var Element */
                 $sender = $event->sender;
                 $sender->attachBehaviors([
-                    Behavior\ElementBehavior::class,
+                    'externalId' => Behavior\ElementBehavior::class,
                 ]);
             }
         );
