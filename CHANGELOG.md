@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.6 - 2022-06-03
+
+* Fix empty query for external id
+
 ## 1.0.5 - 2022-06-03
 
 * Fix missing behavior names
