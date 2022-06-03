@@ -253,7 +253,7 @@ class ExternalId extends Plugin
                 }
 
                 // Filter by external ID
-                if ($elementQuery->getBehavior('externalId') && $elementQuery->externalId) {
+                if ($elementQuery->getBehavior('externalId') && !empty($elementQuery->externalId)) {
                     $elementQuery->subQuery->andWhere(Db::parseParam(
                         '[[elements_external_ids.externalId]]',
                         $elementQuery->externalId,
